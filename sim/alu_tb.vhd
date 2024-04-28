@@ -32,23 +32,6 @@ architecture tb of alu_tb is
   -- OSVVM Shared Variables
   shared variable rv : RandomPType;
   shared variable bin1, bin2, bin3, bin4, bin5, bin6, bin7 : coverage_bin; -- 7 coverage bins
-
-
-  -- ALU instance
-  component alu is 
-    port(
-      in0, in1 : in std_logic_vector(WIDTH-1 downto 0);
-      sel : in std_logic_vector(1 downto 0);
-      output : out std_logic_vector(WIDTH-1 downto 0);
-      neg, zero, posi : out std_logic
-    );
-
-  end component;
-
-  -- OSVVM Random and Coverage
-  signal Rand0, Rand1 :
-  signal RandSel : std_logic_vector(1 downto 0);
-  signal ALU_Coverage : coverage_result;
 begin 
   -- ALU instance
   dut : entity work.alu 
