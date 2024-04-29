@@ -14,9 +14,9 @@
 
 \geometry{margin=1in}
 
-\title{EEL 4712C - Digital Design: Lab Report 5}
+\title{EEL 4712C - Digital Design: Lab Report 6}
 \author{Cole Rottenberg \\ 11062528}
-\date{April 14\textsuperscript{th}, 2024}
+\date{April 29\textsuperscript{th}, 2024}
 
 \lstset{
   language=VHDL,
@@ -39,20 +39,6 @@
 
 \maketitle
 
-% Test VHDL code
-\begin{lstlisting}[caption=Test VHDL Code, label=lst:test-vhdl-code]
--- This is a test VHDL code block
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-
-entity test is
-    Port ( a : in  STD_LOGIC;
-           b : in  STD_LOGIC;
-           c : out  STD_LOGIC);
-end test;
-\end{lstlisting}
-
 \section*{Lab Report}
 
 \subsection*{Problem Statement}
@@ -62,26 +48,7 @@ end test;
 % - Define the outputs.
 % - Define the function of your system. 
 % This section should be 1-2 paragraphs long.
-Lab 5 builds off of lab 4 by turning our simple VGA lab with a bouncing ball into the game "Pong". There are four main parts of the game outlined by the lab assignment:
-\begin{enumerate}
-  \item \textbf{Start and Game Over}: The Start scren should display the word "PONG" in the middle of the screen. The Start screen should also display a "Press B1" message at the bottom of the screen. The game should start when the user presses button 1. The game should end when one player reaches 11 points. The game should display a "Game Over" message when the game ends.
-  \item \textbf{Ball Movement}: The ball should move in a straight line at a constant speed. It should bounce off the top and bottom of the scrren. It should also bounce off the paddles. When the ball hits the left or right side of the screen, the ball should be sent back the to middle of the screen.
-  \item \textbf{Paddle Movement}: The paddles should move up and down with the push buttons. The paddles should not be able to move off the screen.
-  \item \textbf{Scoreboard}: The game should keep track of the score. The game should end when one player reaches 11 points. The scoring of the game should be done using a bitmap of characters displayed on the screen.
-\end{enumerate}
-\subsubsection*{Inputs}
-The inputs to control the game are the push buttons on the DE10-Lite board. Button 1 is used to start the game and button 2 is used to reset the game. The first two switches are used to control the ledt paddle and the third and fourth switches are used to control the right paddle. The ball moves at a constant speed and does not require any user input.
-
-\subsubsection*{Outputs}
-The outputs are the VGA display output. This includes: \code{VGA\_HSYNC}, \code{VGA\_VSYNC}, \code{VGA\_R}, \code{VGA\_G}, and \code{VGA\_B}. The VGA display will display the game screen, the paddles, the ball, the score, and the game over screen. The VGA display works best with a 640x480 resolution.
-
-\subsubsection*{Function}
-The function of the system is broken into three main states of the game: the start screen, the game screen, and the game over screen. The start screen displays the word "PONG" in the middle of the screen and a "Press B1" message at the bottom of the screen. The game screen displays the paddles, the ball, and the score. The game over screen displays a "Game Over" message. The game starts when the user presses button 1 and ends when one player reaches 11 points.
-
-\textbf{Start Screen}: The start screen displays the word "PONG" in the middle of the screen and a "Press B1" message at the bottom of the screen. The game starts when the user presses button 1.
-\textbf{Game Screen}: The game screen displays the paddles, the ball, and the score. The ball moves in a diagonal line at a constant speed. It bounces off the top and bottom of the screen and the paddles. When the ball hits the left or right side of the screen, the ball is sent back to the middle of the screen. The paddles move up and down with the push buttons. The game keeps track of the score and ends when one player reaches 11 points.
-\textbf{Game Over Screen}: The game over screen displays a "Game Over" message. The game ends when one player reaches 11 points.
-
+The Goal of the Lab is to explore the use of OSVVM for creating testbenches for VHDL code. The lab will focus on creating a testbench for a simple ALU design. The ALU design will have two 8-bit inputs and an 8-bit output. The ALU will have the following operations: ADD, SUB, AND, OR. The ALU will have an output signal as well as three flags: zero, positive, and negative. The testbench will be used to verify the functionality of the ALU.
 \subsection*{Design}
 % Describe the design decisions you made.
 % - What components did you use?
@@ -91,32 +58,14 @@ The function of the system is broken into three main states of the game: the sta
 % Explain your design choices(pros/cons).
 % Any designs made in prelab should be included here but more briefly.
 % This section should be 1-2 paragraphs long.
-\subsubsection*{Components}
-The components used in the design are the VGA\_sync module, a clock divider, and the a vga module. The design mimics the previous lab design with a change in the \textbf{vga.vhd} file to include the paddles and the ball. The vga module holds most of the logic for the game and incorporates the other two previously mentioned modules. The VGA\_sync module is used to generate the horizontal and vertical sync signals for the VGA display. The clock divider is used to generate the 25MHz clock signal from the 50MHz clock signal. The clock divider is also used to create a slow clk that control the timing of the movement.
-
-\subsubsection*{Signals}
-The signals that connect the components are the \code{clk\_50MHz} signal, the \code{clk\_25MHz} signal, the \code{slow\_clk} signal, the \code{VGA\_HSYNC} signal, the \code{VGA\_VSYNC} signal, the \code{VGA\_R} signal, the \code{VGA\_G} signal, and the \code{VGA\_B} signal. The \code{clk\_50MHz} signal is the 50MHz clock signal from the DE10-Lite board. The \code{clk\_25MHz} signal is the 25MHz clock signal generated by the clock divider. The \code{slow\_clk} signal is the slow clock signal generated by the clock divider. The \code{VGA\_HSYNC} signal is the horizontal sync signal generated by the VGA\_sync module. The \code{VGA\_VSYNC} signal is the vertical sync signal generated by the VGA\_sync module. The \code{VGA\_R} signal is the red signal generated by the vga module. The \code{VGA\_G} signal is the green signal generated by the vga module. The \code{VGA\_B} signal is the blue signal generated by the vga module. 
-
-\subsubsection*{Algorithms}
-The algorithms used in the design are the same as the previous lab with the addition of the paddles and the ball. The paddles move up and down with the push buttons. The ball moves in a diagonal line at a constant speed. It bounces off the top and bottom of the screen and the paddles. When the ball hits the left or right side of the screen, the ball is sent back to the middle of the screen. The game keeps track of the score and ends when one player reaches 11 points. In addition to the conditional logic used by the VGA, another component of the logic is the state machine responsible for controlling what to display on the screen.
-
-The design flows from the state machine which determinse waht to display on the screen through a set of conditionals within the display logic. The movement of both the paddles and the ball are controlled by the push buttons and the slow clock signal within three seperate processes. The score is only modified by that \code{draw} process when the ball hits the left or right side of the screen. The paddles are only modified by the \code{draw} process when the push buttons are pressed.
+The design of the ALU testbench will be based on the OSVVM library. The testbench will be used to verify the functionality of the ALU. The testbench will have a process that will check each bin for an operation and if the coverage is complete. The testbench will run until all the coverages of input opcodes and output flags are met. The testbench will also have a process that will check the output flags and the operations of the ALU. We will have a final process that will generate these random inputs and opcodes for the ALU. The testbench will be used to verify the functionality of the ALU.
 
 \subsection*{Implementation}
 % Describe the implementation process.
 % Code segments or block diagrams may be included here.
 % What time did you need to complete your design?
 % This section should be 1-2 paragraphs long.
-The first block of code describes all the constants and signals needed for the game. The constants are the size of the ball, the speed of the ball, the size of the paddles, the speed of the paddles, the maximum and minimum values for the paddles, the maximum values for the x and y coordinates of the ball, and the maximum values for the x and y coordinates of the paddles. The signals are the horizontal and vertical count signals, the slow clock signal, the internal signals for the horizontal and vertical sync signals, the internal signal for the video on signal, the x and y coordinates of the ball, the x and y coordinates of the paddles, the scores of the players, the bitmaps for the scores, the bitmaps for the letters, and the game state.
-They can be seen in Listing \ref{lst:constants-signals}. 
-
-The second block of code describes the state machine for the game. The state machine is responsible for controlling the game state and this helps with logic within the display process. 
-This code can be seen in Listing \ref{lst:state-machine}.
-
-The third block of code describes the movement processes for the ball and the paddles. The ball moves in a diagonal line at a constant speed. It bounces off the top and bottom of the screen and the paddles. When the ball hits the left or right side of the screen, the ball is sent back to the middle of the screen. The paddles move up and down with the push buttons. The paddles are not able to move off the screen. The ball and the paddles are only modified by the \code{draw} process when the game is in the playing state. The score is only modified by the \code{draw} process when the ball hits the left or right side of the screen. The paddles are only modified by the \code{draw} process when the push buttons are pressed. This code can be seen in Listing \ref{lst:movement-processes}.
-
-The fourth block of code describes the draw process. The draw process is responsible for displaying the game screen, the paddles, the ball, the score, and the game over screen. The draw process is dependent on the game state and the video on signal. The draw process is also dependent on the x and y coordinates of the ball, the x and y coordinates of the paddles, the x and y coordinates of the scores, and the x and y coordinates of the letters. The draw process is also dependent on the bitmaps for the scores and the letters. The draw process is also dependent on the horizontal and vertical count signals. The draw process is also dependent on the slow clock signal. The draw process is also dependent on the red, green, and blue signals. The draw process is also dependent on the size of the bitmaps. The draw process is also dependent on the maximum values for the x and y coordinates of the ball, the paddles, the scores, and the letters. The draw process is also dependent on the maximum values for the x and y coordinates of the screen. The draw process is also dependent on the maximum values for the x and y coordinates of the paddles. The draw process is also dependent on the maximum values for the x and y coordinates of the scores. The draw process is also dependent on the maximum values for the x and y coordinates of the letters. The draw process is also dependent on the maximum values for the x and y coordinates of the screen. 
-The code can be seen in Listing \ref{lst:draw-process}.
+The implementation followed mostly what the ring\_buffer\_tb did. The testbench was created with the OSVVM library. There were some minor changes due to the lack of a clock within the ALU but overall the testbench matched the one within the example ring\_buffer\_tb. The testbench was able to verify the functionality of the ALU. The testbench was able to verify the functionality of the ALU. The implementation of the testbench can be seen in Listing \ref{lst:alu-tb}.
 
 \subsection*{Testing}
 % Describe how you tested your design.
@@ -124,768 +73,183 @@ The code can be seen in Listing \ref{lst:draw-process}.
 % - Did inputs match the expected outputs?
 % - Special cases?
 % Include if possible, timing diagram of photo/video of the system.
-The testing part of the code mainly took process within a basic testbench from the previous lab which was used just to manually monitor the changing of states and other conditions.
-Other methods of testing were not necessary due to the nature of working with internals of the game. One piece of troublesome code was around the movement process of scoring when the ball touched the edge of the screen. This was fixed allowing for the use of variables to store the new position of the ball and the direction of the ball.
-
+The actual testing of a testbench is a little difficult as it is often difficult to decode whether the ALU is broken or the testbench is broken. In the end the only bit of testing that was overwhelmingly helpful was the coverage data which helped my find a bug in my code regarding the operations using signed datatypes and SLVs.
 \subsection*{Conclusions}
 % Summarize in one paragraph, the work you did, the success and problems you encountered, and how to improve next in the future.
 % This section should only be 1 paragraph long.
-The problems encountered in this lab centered around conditionals within states and the implementation of a bitmap for the scores as well as lettering in the beginning and end of the game. The success of the lab was in the implementation of the game and the movement of the ball and paddles. From lab 4 to the initial steps of implementing paddles were straightforward. The next steps would be to implement a more complex scoring system and to add more features to the game. The most complex piece to the project centered around the use of bitmaps and how I could access the boolean values of a bitmap in certain display locations. This development was the most challenging as well and the most satisfying after completion.
-This lab is entirely complete and the game is fully functional, however some of the bitmaps could be improved and the slow clock could be adjusted to make the game more challenging as well as differing the paddles and balls speed making it more challenging.
+This was on of the most helpful labs and I am excited for the opportunity to use OSVVM in the future. The lab was a success and I was able to verify the functionality of the ALU. The only problem I encountered was a bug in my code regarding the operations using signed datatypes and SLVs. In the future I will be more careful with my datatypes and how I use them in my code.
 
 \section*{Appendix}
 % Include all postlab code, screenshots, and simulations here. ALL SIMULATIONS MUST BE ANNOTATED. This means pointing out particularly important parts of a simulation. This can be done with arrows or textboxes. All figures must be captioned. Code should be commented a fair amount.
-\begin{lstlisting}[caption=Constants and Signals, label=lst:constants-signals]
+\begin{lstlisting}[caption=ALU Testbench, label=lst:alu-tb]
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-    signal v_count : std_logic_vector(COUNT_RANGE);
-    signal h_count : std_logic_vector(COUNT_RANGE);
-    -- Clocks
-    signal slow_clk : std_logic := '0'; -- Slow clock
-    -- Internal Temp signals
-    signal temp_h_sync, temp_v_sync, temp_video_on : std_logic;
-		-- x and y coordinates of ball
-    signal x_pos, y_pos : integer := 200; -- 200 is the center of the screen
-    signal mov_x, mov_y : integer := 1;
-    -- Constants of the ball
-    constant speed : integer := 2;
-    constant size : integer := 64;
-    constant X_MAX : integer := 638;
-    constant Y_MAX : integer := 478;
-    -- Constants for the paddles
-    constant PADDLE_WIDTH : integer := 10;
-    constant PADDLE_HEIGHT : integer := 50;
-    constant PADDLE_SPEED : integer := 2;
-    constant PADDLE_MAX : integer := 428;
-    constant PADDLE_MIN : integer := 0;
-    -- x and y coordinates for each paddle, one on the left and one on the right
-    -- Paddle 1 is on the left, Paddle 2 is on the right
-    signal x_pos_p1 : integer := 0;
-    signal y_pos_p1 : integer := 200;
-    signal x_pos_p2 : integer := 638 - PADDLE_WIDTH;
-    signal y_pos_p2 : integer := 200;
+use std.env.finish;
 
-    signal P1_score : integer := 0;
-    signal P2_score : integer := 0;
+library osvvm;
+use osvvm.RandomPkg.all;
+use osvvm.CoveragePkg.all;
 
--- BITMAPS for PONG, P1 and P2 scores, 0-9 , game over and start
--- using the 2D array to store the bitmaps
--- The dimensions of the array are 8x4
--- PONG
 
-    constant BM_SIZE : integer := 5;
+-- enter your code below
+entity alu_tb is 
+end alu_tb;
 
-    type bitmap is array(4 downto 0) of std_logic_vector(4 downto 0);
+architecture tb of alu_tb is 
+  -- ALU signals
+  constant clock_period : time := 10 ns;
+  signal clk : std_logic := '0';
+  -- Inputs
+  constant WIDTH : integer := 8;
+  signal in0, in1 : std_logic_vector(WIDTH-1 downto 0);
+  signal sel : std_logic_vector(1 downto 0);
+
+  -- Outputs
+  signal output : std_logic_vector(WIDTH-1 downto 0);
+  signal neg : std_logic;
+  signal zero : std_logic;
+  signal posi : std_logic;
+
+  -- OSVVM Shared Variables
+  shared variable rv : RandomPType;
+  shared variable bin1, bin2, bin3, bin4, bin5, bin6, bin7 : CovPType; -- 7 coverage bins
+begin 
+  -- ALU instance
+  dut : entity work.alu 
+    port map(
+      in0 => in0,
+      in1 => in1,
+      sel => sel,
+      output => output,
+      neg => neg,
+      zero => zero,
+      posi => posi
+    );
+
+  -- clock generation
+  clk <= not clk after clock_period/2;
+
+-- Process sequencer
+
+  PROC_SEQUENCER : process
+  begin
+
+    -- Set up coverage bins for the ALU
+    bin1.AddBins("Addition", ONE_BIN);
+    bin2.AddBins("Subtraction", ONE_BIN);
+    bin3.AddBins("And", ONE_BIN);
+    bin4.AddBins("Or", ONE_BIN);
+    bin5.AddBins("Positive", ONE_BIN);
+    bin6.AddBins("Negative", ONE_BIN);
+    bin7.AddBins("Zero", ONE_BIN);
+
+    wait until rising_edge(clk);
+
+    loop
+      wait until rising_edge(clk);
+
+      -- Collect coverage data for the ALU
+      bin1.ICover(to_integer(sel = "00"));
+      bin2.ICover(to_integer(sel = "01"));
+      bin3.ICover(to_integer(sel = "10"));
+      bin4.ICover(to_integer(sel = "11"));
+      bin5.ICover(to_integer(posi = '1'));
+      bin6.ICover(to_integer(neg = '1'));
+      bin7.ICover(to_integer(zero = '1'));
+
+      -- Stop the test when all coverage goals have been met
+      exit when
+        bin1.IsCovered and
+        bin2.IsCovered and
+        bin3.IsCovered and
+        bin4.IsCovered and
+        bin5.IsCovered and
+        bin6.IsCovered and
+        bin7.IsCovered;
+    end loop;
     
-    constant ZERO : bitmap := (
-        "11111",
-        "10001",
-        "10001",
-        "10001",
-        "11111"
-    );
+    report("Coverage goals met");
 
-    constant ONE : bitmap := (
-        "00100",
-        "01100",
-        "10100",
-        "00100",
-        "11111"
-    );
+    -- Print coverage data
+    bin1.WriteBin;
+    bin2.WriteBin;
+    bin3.WriteBin;
+    bin4.WriteBin;
+    bin5.WriteBin;
+    bin6.WriteBin;
+    
+    finish;
+  end process;
 
-    constant TWO : bitmap := (
-        "11111",
-        "00001",
-        "11111",
-        "10000",
-        "11111"
-    );
+-- Generate Random Values for the ALU
+  PROC_RANDOM : process
+  begin
+    in0 <= std_logic_vector(to_unsigned(rv.RandInt(0, 128), WIDTH));
+    in1 <= std_logic_vector(to_unsigned(rv.RandInt(0, 128), WIDTH));
+    -- All four possible ALU operations 00, 01, 10, 11
+    sel <= std_logic_vector(to_unsigned(rv.RandInt(0, 3), 2));
+    
+    wait for 10 ns;
+  end process;
 
-    constant THREE : bitmap := (
-        "11111",
-        "00001",
-        "11111",
-        "00001",
-        "11111"
-    );
+  -- Emulate the ALU operation
+  PROC_BEHAVIORAL_MODEL : process
+  -- Variables for the ALU operation
+  -- We need to turn the SLVs into  signed
+  variable in0_int, in1_int : signed(WIDTH-1 downto 0);
+  variable output_int : signed(WIDTH-1 downto 0);
 
-    constant FOUR : bitmap := (
-        "10001",
-        "10001",
-        "11111",
-        "00001",
-        "00001"
-    );
+  begin
+    in0_int := signed(in0);
+    in1_int := signed(in1);
+    wait until rising_edge(clk);
+    output_int := signed(output);
+    case sel is
+      when "00" =>
+        assert output = std_logic_vector(signed(in0) + signed(in1))
+          report "Addition failed"
+          severity failure;
+      when "01" =>
+        assert output = std_logic_vector(signed(in0) - signed(in1)) 
+          report "Subtraction failed"
+          severity failure;
+      when "10" =>
+        assert output = std_logic_vector(signed(in0 and in1))
+          report "And failed"
+          severity failure;
+      when "11" =>
+        assert output = std_logic_vector(signed(in0 or in1))
+          report "Or failed"
+          severity failure;
+      when others =>
+        report "Invalid operation"
+          severity failure;
+    end case;
 
-    constant FIVE : bitmap := (
-        "11111",
-        "10000",
-        "11111",
-        "00001",
-        "11111"
-    );
+    -- Check the ALU flags
+    if output_int > 0 then
+      assert posi = '1' 
+        report "Positive flag failed"
+        severity failure;
+    end if;
+    if output_int < 0 then
+      assert neg = '1' 
+        report "Negative flag failed"
+        severity failure;
+    end if;
+    if output_int = 0 then
+      assert zero = '1' 
+        report "Zero flag failed"
+        severity failure;
+    end if;
 
-    constant SIX : bitmap := (
-        "11111",
-        "10000",
-        "11111",
-        "10001",
-        "11111"
-    );
+  end process;
 
-    constant SEVEN : bitmap := (
-        "11111",
-        "00001",
-        "00010",
-        "00100",
-        "01000"
-    );
-
-    constant EIGHT : bitmap := (
-        "11111",
-        "10001",
-        "11111",
-        "10001",
-        "11111"
-    );
-
-    constant NINE : bitmap := (
-        "11111",
-        "10001",
-        "11111",
-        "00001",
-        "11111"
-    );
-
-    -- using a function to convert score to a bitmap
-    function score_to_bitmap(score : integer) return bitmap is
-    begin
-        case score is
-            when 0 =>
-                return ZERO;
-            when 1 =>
-                return ONE;
-            when 2 =>
-                return TWO;
-            when 3 =>
-                return THREE;
-            when 4 =>
-                return FOUR;
-            when 5 =>
-                return FIVE;
-            when 6 =>
-                return SIX;
-            when 7 =>
-                return SEVEN;
-            when 8 =>
-                return EIGHT;
-            when 9 =>
-                return NINE;
-            when others =>
-                return ZERO;
-        end case;
-    end score_to_bitmap;
-
-    -- Adding the PONG Letters
-    constant P : bitmap := (
-        "11111",
-        "10001",
-        "10001",
-        "11111",
-        "10000"
-    );
-
-    constant O : bitmap := (
-        "11111",
-        "10001",
-        "10001",
-        "10001",
-        "11111"
-    );
-
-    constant N : bitmap := (
-        "10001",
-        "11001",
-        "10101",
-        "10011",
-        "10001"
-    );
-
-    constant G : bitmap := (
-        "11111",
-        "10000",
-        "10011",
-        "10001",
-        "11111"
-    );
-
-    -- Adding the WIN Letters
-    constant W : bitmap := (
-        "10001",
-        "10001",
-        "10001",
-        "10101",
-        "11011"
-    );
-
-    constant I : bitmap := (
-        "11111",
-        "00100",
-        "00100",
-        "00100",
-        "11111"
-    );
-
-    constant S : bitmap := (
-        "11111",
-        "10000",
-        "11111",
-        "00001",
-        "11111"
-    );
-    -- Position of the bitmap
-
-    -- Position of the P1 score
-    signal x_pos_p1_score : integer := 100;
-    signal y_pos_p1_score : integer := 100;
-
-    -- Position of the P2 score
-    signal x_pos_p2_score : integer := 500;
-    signal y_pos_p2_score : integer := 100;
-
-    -- Position of the PONG letters
-    -- Letter P
-    signal x_pos_p : integer := 250;
-    signal y_pos_p : integer := 100;
-
-    -- Letter O
-    signal x_pos_o : integer := 275;
-    signal y_pos_o : integer := 100;
-
-    -- Letter N
-    signal x_pos_n : integer := 300;
-    signal y_pos_n : integer := 100;
-
-    -- Letter G
-    signal x_pos_g : integer := 325;
-    signal y_pos_g : integer := 100;
-
-    -- Adding Letters for Wins 
-    -- Position of the P1 win
-    signal x_pos_p1_win : integer := 250;
-    signal y_pos_p1_win : integer := 200;
-
-    -- Position of the P2 win
-    signal x_pos_p2_win : integer := 500;
-    signal y_pos_p2_win : integer := 200;
-
-    -- Position of the WIN letters
-    -- Letter W
-    signal x_pos_w : integer := 300;
-    signal y_pos_w : integer := 200;
-
-    -- Letter I
-    signal x_pos_i : integer := 350;
-    signal y_pos_i : integer := 200;
-
-    -- Letter N
-    signal x_pos_n_win : integer := 400;
-    signal y_pos_n_win : integer := 200;
-
-    -- Letter S
-    signal x_pos_s : integer := 450;
-    signal y_pos_s : integer := 200;
-
-    -- Position of the START letters
-    -- Letter S
-    signal x_pos_s_start : integer := 300;
-    signal y_pos_s_start : integer := 300;
-
-    -- Letter T
-    signal x_pos_t : integer := 350;
-    signal y_pos_t : integer := 300;
-
-    -- Letter A
-    signal x_pos_a : integer := 400;
-    signal y_pos_a : integer := 300;
-
-    -- Letter R
-    signal x_pos_r : integer := 450;
-    signal y_pos_r : integer := 300;
-
-    -- Letter T
-    signal x_pos_t_start : integer := 500;
-    signal y_pos_t_start : integer := 300;
-
-    -- Letter S
-    signal x_pos_s_start2 : integer := 550;
-    signal y_pos_s_start2 : integer := 300;
-
-    -- Defining Game States
-    -- 0: Start
-    -- 1: Playing
-    -- 2: P1 Wins
-    -- 3: P2 Wins
-
-    signal game_state : integer := 0; -- Initial state is start
-    -- In the start state the words PONG are displayed
-    -- Whenever the player presses the start button, the game state changes to playing
-    -- If the player presses the rst button, the game state changes to start
-    -- If the player wins, the game state changes to the respective win state
+end tb;
 
 \end{lstlisting}
 
-\begin{lstlisting}[caption=State Machine, label=lst:state-machine]
-
-	clk_div: entity work.clk_div
-		generic map(
-			clk_in_freq => 50e6,
-			clk_out_freq => 50
-		)
-		port map(
-			clk_in => clk,
-			rst => rst,
-			clk_out => slow_clk
-		);
-
-	-- VGA SYNC_GEN BEGINS
-	sync: entity work.vga_sync_gen
-		port map (clk => clk,
-				    rst => rst,
-				    h_count => h_count,
-				    v_count => v_count,
-				    h_sync => temp_h_sync,
-					v_sync => temp_v_sync,
-					video_on => temp_video_on);
-   -- VGA_SYNC_GEN ENDS	
-
-    -- State Machine for the game
-    game_state_machine: process(slow_clk, rst)
-        variable temp_game_state: integer;
-    begin
-        temp_game_state := game_state;
-        if rising_edge(slow_clk) then
-            if rst = '1' then
-                game_state <= 0;
-                -- Reset the scores
-                -- P1_score <= 0; 
-                -- P2_score <= 0;
-                -- Reset the ball position
-            else
-                case game_state is
-                    when 0 =>
-                        if en = '1' then
-                            temp_game_state := 1;
-                        end if;
-                    when 1 =>
-                        if P1_score = 10 then
-                            temp_game_state := 2;
-                        elsif P2_score = 10 then
-                            temp_game_state := 3;
-                        end if;
-                    when 2 =>
-                        if en = '1' then
-                            temp_game_state := 0;
-                        end if;
-                    when 3 =>
-                        if en = '1' then
-                            temp_game_state := 0;
-                        end if;
-                    when others =>
-                        temp_game_state := 0;
-                end case;
-                game_state <= temp_game_state;
-            end if;
-        end if;
-    end process game_state_machine;
-
-\end{lstlisting}
-
-\begin{lstlisting}[caption=Movement Processes, label=lst:movement-processes]
-
-    ball_move: process(slow_clk, rst)
-        variable temp_mov_x: integer;
-        variable temp_mov_y: integer;
-        variable temp_x_pos: integer;
-        variable temp_y_pos: integer;
-    begin
-        temp_mov_x := mov_x;
-        temp_mov_y := mov_y;
-        temp_x_pos := x_pos;
-        temp_y_pos := y_pos;
-        if rising_edge(slow_clk) then
-
-            if rst = '1' then
-                x_pos <= 200;
-                y_pos <= 200;
-                temp_mov_x := 0;
-                temp_mov_y := 0;
-                mov_x <= 0; -- Stopping the balls movement
-                mov_y <= 0;
-
-            else
-                -- If the ball hits the left or right wall, reset the ball to the center
-                if x_pos + size >= X_MAX or x_pos <= 0 then
-                    -- Reset the ball to the center
-                    temp_x_pos := 200;
-                    temp_y_pos := 200;
-                    mov_x <= 1;
-                    mov_y <= 1;
-                    -- Increment the score of the player who scored
-                    if x_pos + size >= X_MAX then
-                        P1_score <= P1_score + 1;
-                    else
-                        P2_score <= P2_score + 1;
-                    end if;
-                -- If the ball hits the top or bottom wall, reverse the direction of the ball
-                elsif y_pos + size >= Y_MAX or y_pos <= 0 then
-                    mov_y <= -1 * mov_y;
-                    temp_mov_y := -1 * temp_mov_y;
-                -- If the ball hits the paddle 1, reverse the direction of the ball
-                elsif
-                    x_pos <= x_pos_p1 + PADDLE_WIDTH and
-                    y_pos + size >= y_pos_p1 and
-                    y_pos <= y_pos_p1 + PADDLE_HEIGHT then
-                    mov_x <= -1 * mov_x;
-                    temp_mov_x := -1 * temp_mov_x;
-                -- If the ball hits the paddle 2, reverse the direction of the ball
-                elsif
-                    x_pos + size >= x_pos_p2 and
-                    y_pos + size >= y_pos_p2 and
-                    y_pos <= y_pos_p2 + PADDLE_HEIGHT then
-                    mov_x <= -1 * mov_x;
-                    temp_mov_x := -1 * temp_mov_x;
-                end if;
-                x_pos <= temp_x_pos + (temp_mov_x * speed);
-                y_pos <= temp_y_pos + (temp_mov_y * speed);
-            end if;
-        end if;
-    end process ball_move;
-
-    -- Paddle 1 movement
-    -- Paddle 1 is dependent on the switches to move up and down
-    -- Switches 0 and 1 are used to move the paddle up and down
-    paddle1_move: process(slow_clk, rst)
-        variable temp_y_pos_p1: integer;
-        variable temp_x_pos_p1: integer;
-    begin
-        temp_y_pos_p1 := y_pos_p1;
-        temp_x_pos_p1 := x_pos_p1;
-        if rising_edge(slow_clk) then
-            if rst = '1' then
-                y_pos_p1 <= 200;
-                x_pos_p1 <= 0;
-            else
-                if switch(0) = '1' and y_pos_p1 - PADDLE_SPEED >= PADDLE_MIN then
-                    y_pos_p1 <= y_pos_p1 - PADDLE_SPEED;
-                    temp_y_pos_p1 := y_pos_p1 - PADDLE_SPEED;
-                elsif switch(1) = '1' and y_pos_p1 + PADDLE_SPEED <= PADDLE_MAX then
-                    y_pos_p1 <= y_pos_p1 + PADDLE_SPEED;
-                    temp_y_pos_p1 := y_pos_p1 + PADDLE_SPEED;
-                end if;
-                y_pos_p1 <= temp_y_pos_p1;
-                x_pos_p1 <= temp_x_pos_p1;
-            end if;
-        end if;
-    end process paddle1_move;
-
-    -- Paddle 2 movement
-    paddle2_move: process(slow_clk, rst)
-        variable temp_y_pos_p2: integer;
-        variable temp_x_pos_p2: integer;
-    begin
-        temp_y_pos_p2 := y_pos_p2;
-        temp_x_pos_p2 := x_pos_p2;
-        if rising_edge(slow_clk) then
-            if rst = '1' or game_state = 0 or game_state = 2 or game_state = 3 then
-                y_pos_p2 <= 200;
-                x_pos_p2 <= 638 - PADDLE_WIDTH;
-            else
-                if switch(2) = '1' and y_pos_p2 - PADDLE_SPEED >= PADDLE_MIN then
-                    y_pos_p2 <= y_pos_p2 - PADDLE_SPEED;
-                    temp_y_pos_p2 := y_pos_p2 - PADDLE_SPEED;
-                elsif switch(3) = '1' and y_pos_p2 + PADDLE_SPEED <= PADDLE_MAX then
-                    y_pos_p2 <= y_pos_p2 + PADDLE_SPEED;
-                    temp_y_pos_p2 := y_pos_p2 + PADDLE_SPEED;
-                end if;
-                y_pos_p2 <= temp_y_pos_p2;
-                x_pos_p2 <= temp_x_pos_p2;
-            end if;
-        end if;
-    end process paddle2_move;
-
-\end{lstlisting}
-
-
-\begin{lstlisting}[caption=Draw Process, label=lst:draw-process]
-	draw: process(clk, rst)
-	begin
-		if rising_edge(clk) then
-		    -- If in the start state, display the PONG letters
-		    -- If in the win state, display the WIN letters with the respective player
-
-            -- Draw the PONG letters
-            if unsigned(h_count) >= to_unsigned(x_pos_p, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_p + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_p, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_p + BM_SIZE * 5, v_count'length) and
-            game_state = 0 and
-            temp_video_on = '1' then
-                if P(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_p) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_p) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display O
-            elsif unsigned(h_count) >= to_unsigned(x_pos_o, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_o + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_o, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_o + BM_SIZE * 5, v_count'length) and
-            game_state = 0 and
-            temp_video_on = '1' then
-                if O(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_o) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_o) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display N
-            elsif unsigned(h_count) >= to_unsigned(x_pos_n, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_n + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_n, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_n + BM_SIZE * 5, v_count'length) and
-            game_state = 0 and
-            temp_video_on = '1' then
-                if N(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_n) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_n) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display G
-            elsif unsigned(h_count) >= to_unsigned(x_pos_g, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_g + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_g, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_g + BM_SIZE * 5, v_count'length) and
-            game_state = 0 and
-            temp_video_on = '1' then
-                if G(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_g) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_g) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-
-        -- Drawing the ball
-            elsif unsigned(h_count) >= to_unsigned(x_pos, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos + size, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos + size, v_count'length) and
-            game_state = 1 and
-            temp_video_on = '1' then  
-                red <= "0111";
-                green <= "0011";
-                blue <= "1011";
-            --- Paddle 1
-            elsif unsigned(h_count) >= to_unsigned(x_pos_p1, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_p1 + PADDLE_WIDTH, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_p1, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_p1 + PADDLE_HEIGHT, v_count'length) and
-            game_state = 1 and
-            temp_video_on = '1' then
-                red <= "0000";
-                green <= "0000";
-                blue <= "1111";
-            --- Paddle 2
-            elsif unsigned(h_count) >= to_unsigned(x_pos_p2, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_p2 + PADDLE_WIDTH, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_p2, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_p2 + PADDLE_HEIGHT, v_count'length) and
-            game_state = 1 and
-            temp_video_on = '1' then
-                red <= "1111";
-                green <= "0000";
-                blue <= "0000";
-            elsif 
-            unsigned(h_count) >= to_unsigned(x_pos_p1_score, h_count'length) 
-            and unsigned(h_count) <= to_unsigned(x_pos_p1_score + BM_SIZE * 3, h_count'length) 
-            and unsigned(v_count) >= to_unsigned(y_pos_p1_score, v_count'length) 
-            and unsigned(v_count) <= to_unsigned(y_pos_p1_score + BM_SIZE * 5, v_count'length) 
-            and game_state = 1
-            and temp_video_on = '1' then
-                -- Convert the y_pos_p1_score and x_pos_p1_score to unsigned to perform the subtraction
-            --- Drawing score for P1
-            -- We need to draw the score and check if first we are in the display area
-            -- and then check what specific pixel we are in
-            -- we then check the value of the bitmap for that score at that pixel
-            -- Our bitmap is 8x4 so it has 5 rows and 5 columns
-                if score_to_bitmap(P1_score)(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_p1_score) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_p1_score) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-
-            -- Drawing score for P2
-            elsif unsigned(h_count) >= to_unsigned(x_pos_p2_score, h_count'length)
-            and unsigned(h_count) <= to_unsigned(x_pos_p2_score + BM_SIZE * 3, h_count'length)
-            and unsigned(v_count) >= to_unsigned(y_pos_p2_score, v_count'length)
-            and unsigned(v_count) <= to_unsigned(y_pos_p2_score + BM_SIZE * 5, v_count'length)
-            and game_state = 1
-            and temp_video_on = '1' then
-                if score_to_bitmap(P2_score)(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_p2_score) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_p2_score) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display the WIN letters for P1
-            elsif unsigned(h_count) >= to_unsigned(x_pos_w, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_w + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_w, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_w + BM_SIZE * 5, v_count'length) and
-            game_state = 2 and
-            temp_video_on = '1' then
-                if W(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_w) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_w) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            elsif unsigned(h_count) >= to_unsigned(x_pos_i, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_i + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_i, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_i + BM_SIZE * 5, v_count'length) and
-            game_state = 2 and
-            temp_video_on = '1' then
-                if I(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_i) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_i) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            elsif unsigned(h_count) >= to_unsigned(x_pos_n_win, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_n_win + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_n_win, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_n_win + BM_SIZE * 5, v_count'length) and
-            game_state = 2 and
-            temp_video_on = '1' then
-                if N(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_n_win) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_n_win) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            elsif unsigned(h_count) >= to_unsigned(x_pos_s, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_s + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_s, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_s + BM_SIZE * 5, v_count'length) and
-            game_state = 2 and
-            temp_video_on = '1' then
-                if S(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_s) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_s) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display 1 for P1
-            elsif unsigned(h_count) >= to_unsigned(x_pos_p1_score, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_p1_score + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_p1_score, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_p1_score + BM_SIZE * 5, v_count'length) and
-            game_state = 2 and
-            temp_video_on = '1' then
-                if score_to_bitmap(1)(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_p1_score) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_p1_score) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display the WIN letters for P2
-            elsif unsigned(h_count) >= to_unsigned(x_pos_w, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_w + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_w, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_w + BM_SIZE * 5, v_count'length) and
-            game_state = 3 and
-            temp_video_on = '1' then
-                if W(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_w) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_w) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            elsif unsigned(h_count) >= to_unsigned(x_pos_i, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_i + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_i, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_i + BM_SIZE * 5, v_count'length) and
-            game_state = 3 and
-            temp_video_on = '1' then
-                if I(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_i) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_i) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            elsif unsigned(h_count) >= to_unsigned(x_pos_n_win, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_n_win + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_n_win, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_n_win + BM_SIZE * 5, v_count'length) and
-            game_state = 3 and
-            temp_video_on = '1' then
-                if N(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_n_win) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_n_win) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            elsif unsigned(h_count) >= to_unsigned(x_pos_s, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_s + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_s, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_s + BM_SIZE * 5, v_count'length) and
-            game_state = 3 and
-            temp_video_on = '1' then
-                if S(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_s) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_s) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Display the 2 for P2
-            elsif unsigned(h_count) >= to_unsigned(x_pos_p2_score, h_count'length) and unsigned(h_count) <= to_unsigned(x_pos_p2_score + BM_SIZE * 3, h_count'length) and
-            unsigned(v_count) >= to_unsigned(y_pos_p2_score, v_count'length) and unsigned(v_count) <= to_unsigned(y_pos_p2_score + BM_SIZE * 5, v_count'length) and
-            game_state = 3 and
-            temp_video_on = '1' then
-                if score_to_bitmap(2)(BM_SIZE - 1 - to_integer(unsigned(v_count) - y_pos_p2_score) / 5)(BM_SIZE - 1 - to_integer(unsigned(h_count) - x_pos_p2_score) / 3) = '1' then
-                    red <= "1111";
-                    green <= "1111";
-                    blue <= "1111";
-                else
-                    red <= "0000";
-                    green <= "0000";
-                    blue <= "0000";
-                end if;
-            -- Else Conditions
-            else
-                red <= "0000";
-                green <= "0000";
-                blue <= "0000";
-            end if;
-        end if;
-
-end process draw;
-\end{lstlisting}
 
 \end{document}
