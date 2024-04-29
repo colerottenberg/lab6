@@ -77,10 +77,34 @@ The actual testing of a testbench is a little difficult as it is often difficult
 \subsection*{Conclusions}
 % Summarize in one paragraph, the work you did, the success and problems you encountered, and how to improve next in the future.
 % This section should only be 1 paragraph long.
-This was on of the most helpful labs and I am excited for the opportunity to use OSVVM in the future. The lab was a success and I was able to verify the functionality of the ALU. The only problem I encountered was a bug in my code regarding the operations using signed datatypes and SLVs. In the future I will be more careful with my datatypes and how I use them in my code.
+This was on of the most helpful labs and I am excited for the opportunity to use OSVVM in the future. The lab was a success and I was able to verify the functionality of the ALU. The only problem I encountered was a bug in my code regarding the operations using signed datatypes and SLVs. In the future I will be more careful with my datatypes and how I use them in my code. 
+
+As seen below in the images, the part 1 testbench was able to compile and simulate. This can be seen in Figures \ref{fig:ex-comp} and \ref{fig:ex-sim}. The ALU testbench was also able to compile and simulate. This can be seen in Figure \ref{fig:alu-sim}.
 
 \section*{Appendix}
 % Include all postlab code, screenshots, and simulations here. ALL SIMULATIONS MUST BE ANNOTATED. This means pointing out particularly important parts of a simulation. This can be done with arrows or textboxes. All figures must be captioned. Code should be commented a fair amount.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Part1.png}
+    \caption{Testbench Compilation}
+    \label{fig:ex-comp}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Part1_TB.png}
+    \caption{Testbench Simulation}
+    \label{fig:ex-sim}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Part2.png}
+    \caption{ALU Testbench Simulation}
+    \label{fig:alu-sim}
+\end{figure}
+
 \begin{lstlisting}[caption=ALU Testbench, label=lst:alu-tb]
 library ieee;
 use ieee.std_logic_1164.all;
