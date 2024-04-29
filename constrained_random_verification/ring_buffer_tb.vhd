@@ -109,8 +109,8 @@ begin
     report("Coverage goals met");
 
     -- Make sure that the DUT is empty before terminating the test
-    wr_en <= force '0';
-    rd_en <= force '1';
+    wr_en <= '0';
+    rd_en <= '1';
     loop
       wait until rising_edge(clk);
       exit when empty = '1';
@@ -187,7 +187,7 @@ begin
       severity failure;
 
     -- Check that the output from the DUT matches the TB FIFO
-    if rd_valid then
+    if rd_valid = '1' then
       assert fifo_out = to_integer(unsigned(rd_data))
         report "rd_data=" & integer'image(to_integer(unsigned(rd_data)))
           & " while fifo_out=" & integer'image(fifo_out)
