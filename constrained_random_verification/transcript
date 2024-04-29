@@ -1,3 +1,11 @@
 # Compile of alu.vhd failed with 1 errors.
 # Compile of alu_tb.vhd failed with 6 errors.
 # 2 compiles, 2 failed with 7 errors.
+# Compile of alu.vhd was successful.
+# Compile of alu_tb.vhd failed with 6 errors.
+# 2 compiles, 1 failed with 6 errors.
+source ../osvvmLibraries/scripts/startup.tcl
+# OSVVM Script Version:  2024.03
+# Simulator Version:     ModelSim-2020.02
+build ../osvvmLibraries
+# set CurrentSimulationDirectory C:/Users/coler/Documents/uf/spring24/dd/lab6/sim

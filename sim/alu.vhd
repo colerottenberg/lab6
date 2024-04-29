@@ -15,7 +15,7 @@ entity alu is
         output : out std_logic_vector(WIDTH-1 downto 0));
 end alu;
 
-architecture arch of alu1 is
+architecture arch of alu is
 begin
 
     process(in0, in1, sel)

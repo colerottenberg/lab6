@@ -8,7 +8,6 @@ library osvvm;
 use osvvm.RandomPkg.all;
 use osvvm.CoveragePkg.all;
 
-use work.DataStructures.all;
 
 -- enter your code below
 entity alu_tb is 
@@ -31,7 +30,7 @@ architecture tb of alu_tb is
 
   -- OSVVM Shared Variables
   shared variable rv : RandomPType;
-  shared variable bin1, bin2, bin3, bin4, bin5, bin6, bin7 : coverage_bin; -- 7 coverage bins
+  shared variable bin1, bin2, bin3, bin4, bin5, bin6, bin7 : CovPType; -- 7 coverage bins
 begin 
   -- ALU instance
   dut : entity work.alu 
@@ -67,14 +66,6 @@ begin
     loop
       wait until rising_edge(clk);
 
-      -- Collect coverage data
-      bin1.ICover(to_integer( = '1' and empty = '1'));
-      bin2.ICover(to_integer(rd_en = '1' and full = '1'));
-      bin3.ICover(to_integer(rd_en = '1' and wr_en = '1' and empty = '0' and empty_next = '1'));
-      bin4.ICover(to_integer(rd_en = '1' and wr_en = '1' and full = '0' and full_next = '1'));
-      bin5.ICover(to_integer(rd_en = '1' and wr_en = '0' and empty = '0' and empty_next = '1'));
-      bin6.ICover(to_integer(rd_en = '0' and wr_en = '1' and full = '0' and full_next = '1'));
-
       -- Collect coverage data for the ALU
       bin1.ICover(to_integer(sel = "00"));
       bin2.ICover(to_integer(sel = "01"));
@@ -91,7 +82,8 @@ begin
         bin3.IsCovered and
         bin4.IsCovered and
         bin5.IsCovered and
-        bin6.IsCovered;
+        bin6.IsCovered and
+        bin7.IsCovered;
     end loop;
     
     report("Coverage goals met");
@@ -110,32 +102,41 @@ begin
 -- Generate Random Values for the ALU
   PROC_RANDOM : process
   begin
-    in0 <= to_std_logic_vector(rv.Random(0, 128));
-    in1 <= to_std_logic_vector(rv.Random(0, 128));
+    in0 <= std_logic_vector(to_unsigned(rv.RandInt(0, 128), WIDTH));
+    in1 <= std_logic_vector(to_unsigned(rv.RandInt(0, 128), WIDTH));
     -- All four possible ALU operations 00, 01, 10, 11
-    sel <= to_std_logic_vector(rv.Random(0, 3));
+    sel <= std_logic_vector(to_unsigned(rv.RandInt(0, 3), 2));
+    
     wait for 10 ns;
   end process;
 
   -- Emulate the ALU operation
   PROC_BEHAVIORAL_MODEL : process
+  -- Variables for the ALU operation
+  -- We need to turn the SLVs into  signed
+  variable in0_int, in1_int : signed(WIDTH-1 downto 0);
+  variable output_int : signed(WIDTH-1 downto 0);
+
   begin
+    in0_int := signed(in0);
+    in1_int := signed(in1);
     wait until rising_edge(clk);
+    output_int := signed(output);
     case sel is
       when "00" =>
-        assert output = in0 + in1
+        assert output = std_logic_vector(signed(in0) + signed(in1))
           report "Addition failed"
           severity failure;
       when "01" =>
-        assert output = in0 - in1
+        assert output = std_logic_vector(signed(in0) - signed(in1)) 
           report "Subtraction failed"
           severity failure;
       when "10" =>
-        assert output = in0 and in1
+        assert output = std_logic_vector(signed(in0 and in1))
           report "And failed"
           severity failure;
       when "11" =>
-        assert output = in0 or in1
+        assert output = std_logic_vector(signed(in0 or in1))
           report "Or failed"
           severity failure;
       when others =>
@@ -144,35 +145,22 @@ begin
     end case;
 
     -- Check the ALU flags
-    if output = 0 then
-      assert zero = '1'
-        report "Zero flag failed"
+    if output_int > 0 then
+      assert posi = '1' 
+        report "Positive flag failed"
         severity failure;
-    else
-      assert zero = '0'
+    end if;
+    if output_int < 0 then
+      assert neg = '1' 
+        report "Negative flag failed"
+        severity failure;
+    end if;
+    if output_int = 0 then
+      assert zero = '1' 
         report "Zero flag failed"
         severity failure;
     end if;
 
-    if output > 0 then
-      assert posi = '1'
-        report "Positive flag failed"
-        severity failure;
-    else
-      assert posi = '0'
-        report "Positive flag failed"
-        severity failure;
-    end if;
-
-    if output < 0 then
-      assert neg = '1'
-        report "Negative flag failed"
-        severity failure;
-    else
-      assert neg = '0'
-        report "Negative flag failed"
-        severity failure;
-    end if;
   end process;
 
 end tb;

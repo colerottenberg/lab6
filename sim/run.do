@@ -1,5 +1,5 @@
 # Specify project info
-variable tbEnt ring_buffer_tb
+variable tbEnt alu_tb
 variable projLibs {
   work
 }

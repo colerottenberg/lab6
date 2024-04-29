@@ -62,24 +62,24 @@ Z49 DPx5 osvvm 9 ifelsepkg 0 22 Yd;<b6=Ujc_83E;P;N]jI2
 Z50 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 Z51 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z52 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 3
-R0
-Z53 8../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd
-Z54 F../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd
+!i122 7
+Z53 dC:/Users/coler/Documents/uf/spring24/dd/lab6/sim
+Z54 8../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd
+Z55 F../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd
 l0
 L48 1
 VH;QWd4ZJnPLC>=g@@fnzk1
 !s100 2BTCA9<h_e>aZz_hB00OH2
-Z55 OV;C;2020.1;71
+Z56 OV;C;2020.1;71
 33
-Z56 !s110 1714363748
+Z57 !s110 1714364317
 !i10b 1
-Z57 !s108 1714363748.000000
-Z58 !s90 -reportprogress|300|-2008|-work|osvvm_spi|../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd|
-!s107 ../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd|
+Z58 !s108 1714364317.000000
+Z59 !s90 -reportprogress|300|-2008|-work|osvvm_spi|../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd|
+Z60 !s107 ../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd|
 !i113 1
-Z59 o-2008 -work osvvm_spi
-Z60 tExplicit 1 CvgOpt 0
+Z61 o-2008 -work osvvm_spi
+Z62 tExplicit 1 CvgOpt 0
 Ablocking
 R2
 R3
@@ -132,22 +132,22 @@ R49
 R50
 R51
 R52
-DEx4 work 3 spi 0 22 H;QWd4ZJnPLC>=g@@fnzk1
-!i122 3
+Z63 DEx4 work 3 spi 0 22 H;QWd4ZJnPLC>=g@@fnzk1
+!i122 7
 l89
-L62 260
-V?3lQGlZRmJM=M>DP61b`J1
-!s100 m[i9Y^E;YknOb5]=`BAMI2
-R55
-33
+Z64 L62 260
+Z65 V?3lQGlZRmJM=M>DP61b`J1
+Z66 !s100 m[i9Y^E;YknOb5]=`BAMI2
 R56
-!i10b 1
+33
 R57
+!i10b 1
 R58
-Z61 !s107 ../osvvmLibraries/SPI_GuyEschemann/src/Spi.vhd|
-!i113 1
 R59
 R60
+!i113 1
+R61
+R62
 Pspicomponentpkg
 R3
 R4
@@ -167,11 +167,11 @@ R2
 R17
 R18
 R19
-Z62 DBx5 osvvm 20 scoreboardgenericpkg 4 body 22 `HQgAgHPIMe:]?KGGA5MO3
+Z67 DBx5 osvvm 20 scoreboardgenericpkg 4 body 22 `HQgAgHPIMe:]?KGGA5MO3
 R21
 R22
 R23
-Z63 DBx5 osvvm 16 memorygenericpkg 4 body 22 B>Gi8SK`c0Xm4m;]_]?cn3
+Z68 DBx5 osvvm 16 memorygenericpkg 4 body 22 B>Gi8SK`c0Xm4m;]_]?cn3
 R25
 R26
 R27
@@ -200,45 +200,45 @@ R50
 R49
 R51
 R52
-!i122 1
+!i122 5
 R1
-R0
+R53
 8../osvvmLibraries/SPI_GuyEschemann/src/SpiComponentPkg.vhd
 F../osvvmLibraries/SPI_GuyEschemann/src/SpiComponentPkg.vhd
 l0
 L42 1
 ViTLN>1CRzZeg<H<KKoCP=1
 !s100 l7S9Kl336068[LQbcjDof1
-R55
-33
 R56
-!i10b 1
+33
 R57
+!i10b 1
+R58
 !s90 -reportprogress|300|-2008|-work|osvvm_spi|../osvvmLibraries/SPI_GuyEschemann/src/SpiComponentPkg.vhd|
 !s107 ../osvvmLibraries/SPI_GuyEschemann/src/SpiComponentPkg.vhd|
 !i113 1
-R59
-R60
+R61
+R62
 ^#spicontext
 R1
-!i122 2
-R0
+!i122 6
+R53
 8../osvvmLibraries/SPI_GuyEschemann/src/SpiContext.vhd
 F../osvvmLibraries/SPI_GuyEschemann/src/SpiContext.vhd
 l0
 L34 1
 V5=hzYT6Rbz2=dP>UTLYLY3
 !s100 @D3MoQkLTGeUJS^Yg=GQJ1
-R55
-33
 R56
-!i10b 0
+33
 R57
+!i10b 0
+R58
 !s90 -reportprogress|300|-2008|-work|osvvm_spi|../osvvmLibraries/SPI_GuyEschemann/src/SpiContext.vhd|
 !s107 ../osvvmLibraries/SPI_GuyEschemann/src/SpiContext.vhd|
 !i113 1
-R59
-R60
+R61
+R62
 Pspitbpkg
 R3
 R4
@@ -257,11 +257,11 @@ R16
 R17
 R18
 R19
-R62
+R67
 R21
 R22
 R23
-R63
+R68
 R25
 R26
 R27
@@ -290,26 +290,26 @@ R34
 R50
 R51
 R52
-!i122 0
+!i122 4
 R1
-R0
-Z64 8../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd
-Z65 F../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd
+R53
+Z69 8../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd
+Z70 F../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd
 l0
 L47 1
 V95=I>0oF1NlzPW9zaNfWa2
 !s100 L;?VRPE:I?_9YPzkc]j5M2
-R55
+R56
 33
 b1
-R56
-!i10b 1
 R57
-Z66 !s90 -reportprogress|300|-2008|-work|osvvm_spi|../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd|
-Z67 !s107 ../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd|
+!i10b 1
+Z71 !s108 1714364316.000000
+Z72 !s90 -reportprogress|300|-2008|-work|osvvm_spi|../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd|
+Z73 !s107 ../osvvmLibraries/SPI_GuyEschemann/src/SpiTbPkg.vhd|
 !i113 1
-R59
-R60
+R61
+R62
 Bbody
 R2
 R3
@@ -329,11 +329,11 @@ R16
 R17
 R18
 R19
-R62
+R67
 R21
 R22
 R23
-R63
+R68
 R25
 R26
 R27
@@ -362,18 +362,18 @@ R34
 R50
 R51
 R52
-!i122 0
+!i122 4
 l0
 L116 1
 VcNgRiF6i7iXnZoWdiH;d]2
 !s100 [DfA`jkM1>Fi0=;d0VWc=0
-R55
-33
 R56
-!i10b 1
+33
 R57
-R66
-R67
+!i10b 1
+R71
+R72
+R73
 !i113 1
-R59
-R60
+R61
+R62
